@@ -104,6 +104,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.device.class_of_device=90,2,12 \
+    bluetooth.hardware.power.idle_cur_ma=0.01 \
+    bluetooth.hardware.power.operating_voltage_mv=3300 \
+    bluetooth.hardware.power.rx_cur_ma=9 \
+    bluetooth.hardware.power.tx_cur_ma=7 \
     bluetooth.profile.a2dp.source.enabled?=true \
     bluetooth.profile.asha.central.enabled?=true \
     bluetooth.profile.avrcp.target.enabled?=true \
@@ -170,32 +174,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
-# FRP
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.frp.pst=/dev/block/bootdevice/by-name/frp
-
 # GPS
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.vendor.overlay.izat.optin=rro
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.egl.hw=0 \
-    debug.mdpcomp.logs=0 \
-    debug.sf.hw=0 \
     debug.sf.latch_unsignaled=1 \
     persist.demo.hdmirotationlock=false \
     persist.sys.sf.color_saturation=1.0 \
     persist.sys.sf.native_mode=1 \
     persist.sys.sf.force_brightness_capability=1 \
     debug.sf.enable_gl_backpressure=1 \
+    debug.sf.disable_client_composition_cache=1 \
     ro.opengles.version=196610 \
     ro.gfx.driver.1=com.qualcomm.qti.gpudrivers.sm6150.api30 \
     vendor.display.enable_default_color_mode=1 \
     vendor.gralloc.disable_ubwc=0
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    debug.sf.enable_hwc_vds=1
+    debug.sf.enable_hwc_vds=0
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -305,6 +303,21 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.vendor.use_data_netmgrd=true \
     telephony.lteOnCdmaDevice=1,1
 
+# Disable Skia tracing by default
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    debug.hwui.skia_atrace_enabled=false
+
+# Chipset
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.soc.manufacturer=QTI \
+    ro.soc.model=SM7150
+
+# Logs
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.log.tag.OpenGLRenderer=S \
+    persist.log.tag.ACDB-LOADER=S \
+    persist.log.tag.QMI_FW=S
+
 # SurfaceFlinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.has_wide_color_display=true \
@@ -312,7 +325,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_color_management=true \
     ro.surface_flinger.wcg_composition_dataspace=143261696 \
     ro.surface_flinger.protected_contents=true \
-    ro.surface_flinger.enable_frame_rate_override=false
+    ro.surface_flinger.enable_frame_rate_override=false \
+    ro.surface_flinger.clear_slots_with_set_layer_buffer=true \
+    service.sf.prime_shader_cache=0 \
+    debug.sf.enable_transaction_tracing=false
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.use_phase_offsets_as_durations=1 \
@@ -330,6 +346,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.delta_time.enable=true
+
+# Watchdog
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hw_timeout_multiplier=6
 
 # WiFi
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
