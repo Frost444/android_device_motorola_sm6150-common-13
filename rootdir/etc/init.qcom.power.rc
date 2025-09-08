@@ -70,6 +70,8 @@ on init
     write /proc/sys/kernel/sched_lib_name "UnityMain,libunity.so"
     write /proc/sys/kernel/sched_lib_mask_force 255
     write /proc/sys/vm/stat_interval 2
+    write /proc/sys/vm/overcommit_memory 2
+    write /proc/sys/vm/overcommit_ratio 100
 
 on property:sys.boot_completed=1
     setprop vendor.setup.power 1
@@ -120,6 +122,7 @@ on property:vendor.setup.power=1
     write /proc/sys/kernel/sched_upmigrate_boosted 25
     write /proc/sys/kernel/sched_upmigrate 95
     write /proc/sys/kernel/sched_downmigrate 85
+    write /proc/sys/kernel/perf_cpu_time_max_percent 10
     write /proc/sys/kernel/sched_energy_aware 1
 
     # Enable bus-dcvs
