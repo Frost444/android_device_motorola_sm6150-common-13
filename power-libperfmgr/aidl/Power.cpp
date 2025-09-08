@@ -7,11 +7,12 @@
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing,
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
  */
 
 #define LOG_TAG "powerhal-libperfmgr"
@@ -93,11 +94,9 @@ ndk::ScopedAStatus Power::setMode(Mode type, bool enabled) {
     }
 #endif
     switch (type) {
-         case Mode::DOUBLE_TAP_TO_WAKE:
-			::android::base::WriteStringToFile(enabled ? "1" : "0",
-				"/sys/class/sensors/dt-gesture/enable", true);
-            break;
-        case Mode::LOW_POWER:
+        case Mode::DOUBLE_TAP_TO_WAKE:
+            ::android::base::WriteStringToFile(enabled ? "1" : "0",
+                "/sys/class/sensors/dt-gesture/enable", true);
             break;
         case Mode::SUSTAINED_PERFORMANCE:
             if (enabled) {
